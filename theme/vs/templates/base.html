@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Психоистория: Блог{% endblock %}</title>
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <!-- Хедер -->
+    <header class="site-header">
+        <div class="header-container">
+            <!-- Тематическое изображение (замените src на свое при необходимости) -->
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1100&h=150&fit=crop&q=80"
+                 alt="Абстрактная сеть, символизирующая психоисторию"
+                 class="header-image">
+
+            <div class="header-content">
+                <h1 class="site-title"><a href="{{ SITEURL }}">Психоистория</a></h1>
+
+                <!-- Кнопка бургер-меню -->
+                <button class="burger-menu" aria-label="Открыть меню" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="{{ SITEURL }}">Главная</a></li>
+                        <li><a href="{{ SITEURL }}/category/analitika.html">Аналитика</a></li>
+                        <li><a href="{{ SITEURL }}/category/istoriya.html">История Галактики</a></li>
+                        <li><a href="{{ SITEURL }}/pages/o-sajte.html">О сайте</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <div class="container">
+        <main class="content-column">
+            {% block content %}
+            <!-- Пример карточки статьи для index.html -->
+            <article class="post-preview">
+                <header class="post-header">
+                    <h2 class="post-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                    <div class="post-meta">
+                        <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
+                        <span class="category">в <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a></span>
+                    </div>
+                </header>
+                <div class="post-summary">
+                    <p>{{ article.summary | striptags | truncate(200) }}</p>
+                </div>
+                <a href="{{ article.url }}" class="read-more">Читать далее →</a>
+            </article>
+            {% endblock %}
+
+            <!-- Пагинация -->
+            {% if articles_page and articles_page.has_other_pages() %}
+            <nav class="pagination">
+                {% if articles_page.has_previous() %}
+                    <a href="{{ SITEURL }}/{{ articles_previous_page.url }}">← Новые</a>
+                {% endif %}
+                {% if articles_page.has_next() %}
+                    <a href="{{ SITEURL }}/{{ articles_next_page.url }}">Старые →</a>
+                {% endif %}
+            </nav>
+            {% endif %}
+        </main>
+
+        <!-- Сайдбар -->
+        <aside class="sidebar-column">
+            <div class="widget">
+                <h3 class="widget-title">Поиск</h3>
+                <form action="{{ SITEURL }}/search.html" class="search-form">
+                    <input type="text" name="q" placeholder="Поиск по архивам..." required>
+                </form>
+            </div>
+
+            <div class="widget">
+                <h3 class="widget-title">Облако тегов</h3>
+                <div class="tag-cloud">
+                    {% for tag, articles in tags %}
+                        <a href="{{ SITEURL }}/{{ tag.url }}" class="tag-pill">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="widget">
+                <h3 class="widget-title">Свежие записи</h3>
+                <ul class="recent-posts">
+                    {% for article in articles[:5] %}
+                        <li><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="widget">
+                <h3 class="widget-title">Подписка</h3>
+                <a href="{{ FEED_ALL_ATOM }}" class="rss-link">RSS-лента</a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Футер -->
+    <footer class="site-footer">
+        <blockquote class="footer-quote">
+            «Насилие — последний приют некомпетентности».
+            <cite>— Айзек Азимов, «Основание»</cite>
+        </blockquote>
+        <div class="footer-links">
+            <a href="https://github.com/yourusername">GitHub</a>
+            <span>&copy; {{ CURRENT_YEAR }} Психоистория. Все права защищены.</span>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.burger-menu').addEventListener('click', function() {
+            const nav = document.querySelector('.main-nav');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            nav.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
