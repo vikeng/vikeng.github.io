@@ -1,27 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
-    {% block content_title %}
-        <h2>All articles</h2>
-    {% endblock %}
-
-
+{% if articles %}
     {% for article in articles_page.object_list %}
         <article>
-            <header> <h2><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h2> </header>
+            <header class="article-header">
+                <h2><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h2>
+                <time datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }} </time>
+            </header>
             <section>{{ article.summary }}</section>
-            <footer>
-                <p>Published: <time datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }} </time></p>
-                <address>By
-                    {% for author in article.authors %}
-                        <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
-                    {% endfor %}
-                </address>
+<footer class="article_footer">
+{% if article.category %}
+	Раздел:
+	<span>
+		<a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+	</span>
+	{% endif %}
+	{% if article.tags %}
+    Теги:
+	{% for tag in article.tags %}
+	<span>
+		<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+	</span>
+	{% endfor %}
+	{% endif %}
             </footer>
         </article>
+    <hr />
     {% endfor %}
 
     {% if articles_page.has_other_pages() %}
         {% include 'pagination.html' %}
     {% endif %}
-
+{% endif %} {# If articles #}
 {% endblock content %}

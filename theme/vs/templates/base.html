@@ -3,22 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Психоистория: Блог{% endblock %}</title>
+    <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-
     <!-- Хедер -->
     <header class="site-header">
         <div class="header-container">
-            <!-- Тематическое изображение (замените src на свое при необходимости) -->
-            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1100&h=150&fit=crop&q=80"
-                 alt="Абстрактная сеть, символизирующая психоисторию"
-                 class="header-image">
-
             <div class="header-content">
-                <h1 class="site-title"><a href="{{ SITEURL }}">Психоистория</a></h1>
+                <h1 class="site-title"><a href="{{ SITEURL }}">{{ SITENAME }}</a></h1>
 
                 <!-- Кнопка бургер-меню -->
                 <button class="burger-menu" aria-label="Открыть меню" aria-expanded="false">
@@ -30,8 +24,9 @@
                 <nav class="main-nav">
                     <ul>
                         <li><a href="{{ SITEURL }}">Главная</a></li>
-                        <li><a href="{{ SITEURL }}/category/analitika.html">Аналитика</a></li>
-                        <li><a href="{{ SITEURL }}/category/istoriya.html">История Галактики</a></li>
+                        {% for category, articles in categories %}
+                        <li><a href="{{ SITEURL }}/{{ category.url }}">{{ category.name }}</a></li>
+                        {% endfor %}
                         <li><a href="{{ SITEURL }}/pages/o-sajte.html">О сайте</a></li>
                     </ul>
                 </nav>
@@ -108,16 +103,10 @@
 
     <!-- Футер -->
     <footer class="site-footer">
-        <blockquote class="footer-quote">
-            «Насилие — последний приют некомпетентности».
-            <cite>— Айзек Азимов, «Основание»</cite>
-        </blockquote>
         <div class="footer-links">
-            <a href="https://github.com/yourusername">GitHub</a>
-            <span>&copy; {{ CURRENT_YEAR }} Психоистория. Все права защищены.</span>
+            <span>&copy; {{ CURRENT_YEAR }} VikEng.Space. Все права защищены.</span>
         </div>
     </footer>
-
     <script>
         document.querySelector('.burger-menu').addEventListener('click', function() {
             const nav = document.querySelector('.main-nav');

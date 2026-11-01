@@ -1,10 +1,10 @@
 :root {
     --bg-color: #f8f9fa;
     --text-color: #212529;
-    --accent-color: #0d6efd; /* Космический синий */
-    --accent-hover: #0a58ca;
-    --border-color: #dee2e6;
-    --header-bg: #1a1d21;
+    --accent-color: #483d8b;
+    --accent-hover: #4b0082;
+    --border-color: #dde2e6;
+    --header-bg: #483d8b;
     --header-text: #e9ecef;
     --font-heading: 'Courier New', Courier, monospace; /* Ретро-научный стиль */
     --font-body: system-ui, -apple-system, sans-serif;
@@ -53,7 +53,8 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 
 .header-image {
     width: 100%;
-    height: 120px;
+    height: auto;
+    aspect-ratio: 11 / 2; /* Соотношение сторон для баннера */
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 1.5rem;
@@ -100,11 +101,12 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
     gap: 1.5rem;
     margin: 0;
 }
-.main-nav a { color: #adb5bd; font-weight: 500; }
+.main-nav a { color: #dcdcdc; font-weight: 500; }
 .main-nav a:hover { color: #fff; text-decoration: none; }
 
 /* Макет */
 .container {
+    width: 100%;
     max-width: var(--max-width);
     margin: 2rem auto;
     padding: 0 1rem;
@@ -165,6 +167,7 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 .widget-title {
     font-family: var(--font-heading);
     font-size: 1rem;
+    color: var(--accent-color);
     margin-bottom: 0.75rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--border-color);
@@ -225,6 +228,25 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
     gap: 0.5rem;
 }
 .footer-links a { color: #adb5bd; }
+
+.article-header {
+    margin-bottom:1rem;
+}
+.article_footer {
+    margin-top:0.5rem;
+    margin-bottom:1.5rem;
+}
+.article-header time, .article-header span, .article_footer {
+    color: #808080;
+    font-size: 0.8rem;
+}
+
+hr {
+    margin-top:20px;
+    margin-bottom:20px;
+    border:0;
+    border-top:1px solid var(--border-color);
+}
 
 /* Адаптивность и бургер */
 @media (max-width: 768px) {

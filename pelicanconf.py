@@ -1,6 +1,6 @@
 AUTHOR = 'vikeng'
 SITENAME = 'VikEng.Space'
-SITEURL = ""
+SITEURL = "http://127.0.0.1:8000"
 
 PATH = "content"
 
@@ -14,6 +14,11 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
+
+
+# Формат даты для отображения
+DEFAULT_DATE_FORMAT = '%d.%m.%Y'
+
 
 # Blogroll
 LINKS = (
@@ -37,8 +42,8 @@ DEFAULT_PAGINATION = 10
 PAGE_URL = "{slug}.html"
 PAGE_SAVE_AS = "{slug}.html"
 
-ARTICLE_URL = "posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/"
-ARTICLE_SAVE_AS = "posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html"
+ARTICLE_URL = "posts/{date:%Y}/{date:%m}/{date:%d}/{slug}/"
+ARTICLE_SAVE_AS = "posts/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html"
 
 #ARTICLE_URL = "posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/"
 #ARTICLE_SAVE_AS = "posts/{date:%Y}/{date:%b}/{date:%d}/{slug}/index.html"
@@ -52,6 +57,14 @@ THEME="theme/vs"
 # Хорошо выглядит
 # THEME="theme/simple-bootstrap"
 # THEME="theme/elegant"
+# Стили
+# THEME="theme/pelican-haerwu-theme"
+# Стили
+# THEME="theme/storm"
+# Стили!!!!!!!
+# THEME="theme/aboutwilson"
+
+
 #THEME="theme/relapse"
 #THEME="theme/Peli-Kiera"
 # THEME="theme/gum"
@@ -73,26 +86,10 @@ THEME="theme/vs"
 
 
 
-#THEME="theme/supersimple"
-#THEME="theme/franticworld"
-#THEME="theme/pelican-mockingbird"
-#THEME="theme/smoothie"
-#THEME="theme/blue-penguin"
-#THEME="theme/attila"
-#THEME="theme/basic"
-#THEME="theme/notmyidea-cms-fr"
-#THEME="theme/yapeme"
-#THEME="theme/pelican-fh5co-marble"
-#THEME="theme/pelican-cait"
-#THEME="theme/blue-penguin-dark"
-#THEME="theme/pelican-bootstrap3"
-#THEME="theme/pelican-haerwu-theme"
-#THEME="theme/pjport"
-#THEME="theme/ops"
-#THEME="theme/pelican-blue"
-#THEME="theme/storm"
-#THEME="theme/Responsive-Pelican"
-#THEME="theme/aboutwilson"
+
+
+
+
 #THEME="theme/fresh"
 #THEME="theme/material"
 #THEME="theme/pelican-b-side"
