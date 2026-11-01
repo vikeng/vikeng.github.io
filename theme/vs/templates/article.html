@@ -16,6 +16,15 @@
 {% endblock %}
 
 {% block content %}
+<nav class="breadcrumbs" aria-label="Хлебные крошки">
+    <a href="{{ SITEURL }}/">Главная</a>
+    {% if article.category %}
+        <span class="separator">›</span>
+        <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+    {% endif %}
+    <span class="separator">›</span>
+    <span class="current">{{ article.title }}</span>
+</nav>
         <article>
             <header class="article-header">
                 <h2><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="{{ article.title|striptags }}">{{ article.title }}</a></h2>
